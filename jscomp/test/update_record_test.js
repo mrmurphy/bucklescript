@@ -3,6 +3,7 @@
 var Mt = require("./mt.js");
 var Block = require("../../lib/js/block.js");
 var Caml_obj = require("../../lib/js/caml_obj.js");
+var Caml_array = require("../../lib/js/caml_array.js");
 
 var suites = [/* [] */0];
 
@@ -31,7 +32,7 @@ function eq(loc, x, y) {
 
 function f(x) {
   var y = Caml_obj.caml_obj_dup(x);
-  var newrecord = y.slice();
+  var newrecord = Caml_array.caml_array_dup(y);
   newrecord[/* a0 */0] = 1;
   return newrecord;
 }

@@ -3,6 +3,7 @@
 var Mt = require("./mt.js");
 var Block = require("../../lib/js/block.js");
 var Curry = require("../../lib/js/curry.js");
+var Caml_array = require("../../lib/js/caml_array.js");
 
 var v = /* record */[
   /* syntax : None */0,
@@ -14,12 +15,12 @@ var v = /* record */[
   /* extends */0
 ];
 
-var newrecord = v.slice();
+var newrecord = Caml_array.caml_array_dup(v);
 
 newrecord[/* imports */1] = 0;
 
 function f(g, h) {
-  var newrecord = Curry._1(g, h).slice();
+  var newrecord = Caml_array.caml_array_dup(Curry._1(g, h));
   newrecord[/* imports */1] = 0;
   return newrecord;
 }

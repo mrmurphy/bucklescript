@@ -6,6 +6,7 @@ var Curry = require("../../lib/js/curry.js");
 var Printf = require("../../lib/js/printf.js");
 var Random = require("../../lib/js/random.js");
 var Caml_obj = require("../../lib/js/caml_obj.js");
+var Caml_array = require("../../lib/js/caml_array.js");
 var Caml_int32 = require("../../lib/js/caml_int32.js");
 var Pervasives = require("../../lib/js/pervasives.js");
 var Caml_primitive = require("../../lib/js/caml_primitive.js");
@@ -2234,7 +2235,7 @@ function update_loop(canvas, param, map_dim) {
       if (player$1[2][/* kill */8] === true) {
         return game_loss(state[/* ctx */1]);
       } else {
-        var newrecord = state.slice();
+        var newrecord = Caml_array.caml_array_dup(state);
         newrecord[/* vpt */2] = update(state[/* vpt */2], player$1[2][/* pos */1]);
         List.iter((function (obj) {
                 run_update_collid(newrecord, obj, objs);

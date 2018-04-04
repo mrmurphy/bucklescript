@@ -4139,7 +4139,7 @@ function row_repr_aux(_ll, _row) {
       if (ll === /* [] */0) {
         return row;
       } else {
-        var newrecord = row.slice();
+        var newrecord = Caml_array.caml_array_dup(row);
         newrecord[/* row_fields */0] = rev_concat(row[/* row_fields */0], ll);
         return newrecord;
       }
@@ -4952,7 +4952,7 @@ function it_type_expr(it, ty) {
   }
 }
 
-var newrecord = type_iterators.slice();
+var newrecord = Caml_array.caml_array_dup(type_iterators);
 
 newrecord[/* it_type_expr */13] = it_type_expr;
 
@@ -4970,7 +4970,7 @@ function it_type_expr$1(_, ty) {
   return unmark_type(ty);
 }
 
-var newrecord$1 = newrecord.slice();
+var newrecord$1 = Caml_array.caml_array_dup(newrecord);
 
 newrecord$1[/* it_type_expr */13] = it_type_expr$1;
 
@@ -5840,7 +5840,7 @@ var ident_none = wrap(create, "None");
 var ident_some = wrap(create, "Some");
 
 function common_initial_env(add_type, add_extension, empty_env) {
-  var newrecord = decl_abstr.slice();
+  var newrecord = Caml_array.caml_array_dup(decl_abstr);
   newrecord[/* type_kind */2] = /* Type_variant */Block.__(1, [/* :: */[
         cstr(ident_false, /* [] */0),
         /* :: */[
@@ -5848,12 +5848,12 @@ function common_initial_env(add_type, add_extension, empty_env) {
           /* [] */0
         ]
       ]]);
-  var newrecord$1 = decl_abstr.slice();
+  var newrecord$1 = Caml_array.caml_array_dup(decl_abstr);
   newrecord$1[/* type_kind */2] = /* Type_variant */Block.__(1, [/* :: */[
         cstr(ident_void, /* [] */0),
         /* [] */0
       ]]);
-  var newrecord$2 = decl_abstr.slice();
+  var newrecord$2 = Caml_array.caml_array_dup(decl_abstr);
   newrecord$2[/* type_kind */2] = /* Type_open */1;
   var tvar = newty2(100000000, /* Tvar */Block.__(0, [/* None */0]));
   var decl_array_000 = /* type_params : :: */[
@@ -6020,7 +6020,7 @@ function common_initial_env(add_type, add_extension, empty_env) {
 function build_initial_env(add_type, add_exception, empty_env) {
   var common = common_initial_env(add_type, add_exception, empty_env);
   var safe_string = Curry._3(add_type, ident_bytes, decl_abstr, common);
-  var newrecord = decl_abstr.slice();
+  var newrecord = Caml_array.caml_array_dup(decl_abstr);
   newrecord[/* type_manifest */4] = /* Some */[type_string];
   var unsafe_string = Curry._3(add_type, ident_bytes, newrecord, common);
   return /* tuple */[
@@ -8630,7 +8630,7 @@ function loc(s, x) {
   }
 }
 
-var newrecord$2 = default_mapper.slice();
+var newrecord$2 = Caml_array.caml_array_dup(default_mapper);
 
 newrecord$2[/* location */20] = (function (_, _$1) {
     return none;
@@ -8939,7 +8939,7 @@ function typexp(s, ty) {
                   var match$8 = row$1[/* row_name */5];
                   if (match$8) {
                     var match$9 = match$8[0];
-                    var newrecord = row$1.slice();
+                    var newrecord = Caml_array.caml_array_dup(row$1);
                     tmp = /* Tvariant */Block.__(8, [(newrecord[/* row_name */5] = /* Some */[/* tuple */[
                               type_path(s, match$9[0]),
                               match$9[1]
@@ -9510,13 +9510,13 @@ var empty = /* record */[
 ];
 
 function in_signature(env) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* flags */13] = env[/* flags */13] | 1;
   return newrecord;
 }
 
 function implicit_coercion(env) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* flags */13] = env[/* flags */13] | 2;
   return newrecord;
 }
@@ -11141,7 +11141,7 @@ function find_shadowed_types(path, env) {
 }
 
 function add_gadt_instance_level(lv, env) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* gadt_instances */12] = /* :: */[
     /* tuple */[
       lv,
@@ -11678,7 +11678,7 @@ function components_of_module(env, sub, path, mty) {
 }
 
 function store_modtype(slot, id, path, info, env, renv) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* modtypes */5] = add$6("module type", slot, id, /* tuple */[
         path,
         info
@@ -11692,7 +11692,7 @@ function store_modtype(slot, id, path, info, env, renv) {
 }
 
 function store_module(slot, id, path, md, env, renv) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* modules */4] = add$6("module", slot, id, /* tuple */[
         path,
         md
@@ -11710,7 +11710,7 @@ function store_module(slot, id, path, md, env, renv) {
 }
 
 function store_type_infos(slot, id, path, info, env, renv) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* types */3] = add$6("type", slot, id, /* tuple */[
         path,
         /* tuple */[
@@ -11953,7 +11953,7 @@ function store_value(check, slot, id, path, decl, env, renv) {
   may((function (f) {
           return check_usage(decl[/* val_loc */2], id, f, value_declarations);
         }), check);
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* values */0] = add$6("value", slot, id, /* tuple */[
         path,
         decl
@@ -12027,7 +12027,7 @@ function store_type(check, slot, id, path, info, env, renv) {
             }
           }), constructors);
   }
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* constrs */1] = List.fold_right((function (param, constrs) {
           return add$6("constructor", slot, param[0], param[1], constrs, renv[/* constrs */1]);
         }), constructors, env[/* constrs */1]);
@@ -12086,7 +12086,7 @@ function store_extension(check, slot, id, path, ext, env, renv) {
     }
     
   }
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* constrs */1] = add$6("constructor", slot, id, extension_descr(path, ext), env[/* constrs */1], renv[/* constrs */1]);
   newrecord[/* summary */10] = /* Env_extension */Block.__(2, [
       env[/* summary */10],
@@ -12097,7 +12097,7 @@ function store_extension(check, slot, id, path, ext, env, renv) {
 }
 
 function store_class(slot, id, path, desc, env, renv) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* classes */7] = add$6("class", slot, id, /* tuple */[
         path,
         desc
@@ -12111,7 +12111,7 @@ function store_class(slot, id, path, desc, env, renv) {
 }
 
 function store_cltype(slot, id, path, desc, env, renv) {
-  var newrecord = env.slice();
+  var newrecord = Caml_array.caml_array_dup(env);
   newrecord[/* cltypes */8] = add$6("class type", slot, id, /* tuple */[
         path,
         desc
@@ -12170,7 +12170,7 @@ function add_module_declaration(arg, id, md, env) {
   var env$2 = env$1;
   var arg$1 = $staropt$star ? $staropt$star[0] : false;
   if (arg$1) {
-    var newrecord = env$2.slice();
+    var newrecord = Caml_array.caml_array_dup(env$2);
     newrecord[/* functor_args */9] = add(id$1, /* () */0, env$2[/* functor_args */9]);
     newrecord[/* summary */10] = /* Env_functor_arg */Block.__(8, [
         env$2[/* summary */10],
@@ -12202,12 +12202,12 @@ function add_local_constraint(id, info, elv, env) {
   if (info[/* type_manifest */4]) {
     var match = info[/* type_newtype_level */6];
     if (match) {
-      var newrecord = info.slice();
+      var newrecord = Caml_array.caml_array_dup(info);
       var env$1 = add_type$1(false, id, (newrecord[/* type_newtype_level */6] = /* Some */[/* tuple */[
                 match[0][0],
                 elv
               ]], newrecord), env);
-      var newrecord$1 = env$1.slice();
+      var newrecord$1 = Caml_array.caml_array_dup(env$1);
       newrecord$1[/* local_constraints */11] = true;
       return newrecord$1;
     } else {
@@ -12322,7 +12322,7 @@ function open_signature(slot, root, sg, env0) {
             
           }
         }), env0, sg$2, match[0]);
-  var newrecord = newenv.slice();
+  var newrecord = Caml_array.caml_array_dup(newenv);
   newrecord[/* summary */10] = /* Env_open */Block.__(7, [
       env0[/* summary */10],
       root
@@ -12643,7 +12643,7 @@ function keep_only_summary(env) {
   if (last_env[0] === env) {
     return last_reduced_env[0];
   } else {
-    var newrecord = empty.slice();
+    var newrecord = Caml_array.caml_array_dup(empty);
     newrecord[/* summary */10] = env[/* summary */10];
     newrecord[/* local_constraints */11] = env[/* local_constraints */11];
     newrecord[/* flags */13] = env[/* flags */13];
@@ -21988,7 +21988,7 @@ function alpha_pat(env, p) {
   } else {
     switch (d.tag | 0) {
       case 0 : 
-          var newrecord = p.slice();
+          var newrecord = Caml_array.caml_array_dup(p);
           var tmp;
           try {
             tmp = /* Tpat_var */Block.__(0, [
@@ -22008,7 +22008,7 @@ function alpha_pat(env, p) {
       case 1 : 
           var new_p = alpha_pat(env, d[0]);
           try {
-            var newrecord$1 = p.slice();
+            var newrecord$1 = Caml_array.caml_array_dup(p);
             newrecord$1[/* pat_desc */0] = /* Tpat_alias */Block.__(1, [
                 new_p,
                 List.assoc(d[1], env),
@@ -22028,7 +22028,7 @@ function alpha_pat(env, p) {
     }
   }
   if (exit === 1) {
-    var newrecord$2 = p.slice();
+    var newrecord$2 = Caml_array.caml_array_dup(p);
     newrecord$2[/* pat_desc */0] = map_pattern_desc((function (param) {
             return alpha_pat(env, param);
           }), d);
@@ -22299,7 +22299,7 @@ function TypedtreeMap_000(funarg) {
       typ_kind = match === 0 ? /* Ttype_abstract */0 : /* Ttype_open */1;
     } else if (match.tag) {
       var list = List.map((function (ld) {
-              var newrecord = ld.slice();
+              var newrecord = Caml_array.caml_array_dup(ld);
               newrecord[/* ld_type */3] = map_core_type(ld[/* ld_type */3]);
               return newrecord;
             }), match[0]);
@@ -23057,7 +23057,7 @@ function TypedtreeMap_000(funarg) {
           ret
         ]);
     }
-    var newrecord = ext$1.slice();
+    var newrecord = Caml_array.caml_array_dup(ext$1);
     return Curry._1(funarg[/* leave_extension_constructor */29], (newrecord[/* ext_kind */3] = ext_kind, newrecord));
   };
   var map_package_type = function (pack) {
@@ -23187,21 +23187,21 @@ function TypedtreeMap_000(funarg) {
   var map_value_description = function (v) {
     var v$1 = Curry._1(funarg[/* enter_value_description */1], v);
     var val_desc = map_core_type(v$1[/* val_desc */2]);
-    var newrecord = v$1.slice();
+    var newrecord = Caml_array.caml_array_dup(v$1);
     return Curry._1(funarg[/* leave_value_description */26], (newrecord[/* val_desc */2] = val_desc, newrecord));
   };
   var map_class_type_declaration = function (cd) {
     var cd$1 = Curry._1(funarg[/* enter_class_type_declaration */18], cd);
     var ci_params = List.map(map_type_parameter, cd$1[/* ci_params */1]);
     var ci_expr = map_class_type(cd$1[/* ci_expr */7]);
-    var newrecord = cd$1.slice();
+    var newrecord = Caml_array.caml_array_dup(cd$1);
     return Curry._1(funarg[/* leave_class_type_declaration */43], (newrecord[/* ci_params */1] = ci_params, newrecord[/* ci_expr */7] = ci_expr, newrecord));
   };
   var map_class_declaration = function (cd) {
     var cd$1 = Curry._1(funarg[/* enter_class_declaration */16], cd);
     var ci_params = List.map(map_type_parameter, cd$1[/* ci_params */1]);
     var ci_expr = map_class_expr(cd$1[/* ci_expr */7]);
-    var newrecord = cd$1.slice();
+    var newrecord = Caml_array.caml_array_dup(cd$1);
     return Curry._1(funarg[/* leave_class_declaration */41], (newrecord[/* ci_params */1] = ci_params, newrecord[/* ci_expr */7] = ci_expr, newrecord));
   };
   var map_module_binding = function (x) {
@@ -23322,7 +23322,7 @@ function TypedtreeMap_000(funarg) {
     var cd$1 = Curry._1(funarg[/* enter_class_description */17], cd);
     var ci_params = List.map(map_type_parameter, cd$1[/* ci_params */1]);
     var ci_expr = map_class_type(cd$1[/* ci_expr */7]);
-    var newrecord = cd$1.slice();
+    var newrecord = Caml_array.caml_array_dup(cd$1);
     return Curry._1(funarg[/* leave_class_description */42], (newrecord[/* ci_params */1] = ci_params, newrecord[/* ci_expr */7] = ci_expr, newrecord));
   };
   return [
@@ -23352,7 +23352,7 @@ catch (exn$2){
 }
 
 function leave_pattern(p) {
-  var newrecord = p.slice();
+  var newrecord = Caml_array.caml_array_dup(p);
   newrecord[/* pat_env */4] = keep_only_summary(p[/* pat_env */4]);
   return newrecord;
 }
@@ -25119,7 +25119,7 @@ function update_level(env, level, _ty) {
               if (match$3) {
                 if (level < get_level(env, match$3[0][0])) {
                   log_type(ty$1);
-                  var newrecord = row.slice();
+                  var newrecord = Caml_array.caml_array_dup(row);
                   ty$1[/* desc */0] = /* Tvariant */Block.__(8, [(newrecord[/* row_name */5] = /* None */0, newrecord)]);
                 }
                 
@@ -25639,7 +25639,7 @@ function copy(env, partial, keep_names, ty) {
                   if (typeof match$11 === "number" || !(match$11.tag === 3 && !row[/* row_fixed */4])) {
                     row$1 = row;
                   } else {
-                    var newrecord = row.slice();
+                    var newrecord = Caml_array.caml_array_dup(row);
                     newrecord[/* row_fixed */4] = true;
                     row$1 = newrecord;
                   }
@@ -26316,7 +26316,7 @@ function expand_abbrev_gen(kind, find_type_expansion, env, ty) {
         if (match$3.tag === 8) {
           var row = match$3[0];
           if (static_row(row)) {
-            var newrecord = row.slice();
+            var newrecord = Caml_array.caml_array_dup(row);
             ty$2[/* desc */0] = /* Tvariant */Block.__(8, [(newrecord[/* row_name */5] = /* Some */[/* tuple */[
                       path,
                       args
@@ -29722,7 +29722,7 @@ function unify_row(env, row1, row2) {
           return unify(env, rm, more);
         }
       } else {
-        var newrecord = row0.slice();
+        var newrecord = Caml_array.caml_array_dup(row0);
         var ty = newty2(100000000, /* Tvariant */Block.__(8, [(newrecord[/* row_fields */0] = rest$1, newrecord)]));
         update_level(env[0], rm[/* level */1], ty);
         return link_type(rm, ty);
@@ -30588,7 +30588,7 @@ function moregen(inst_nongen, type_pairs, env, t1, t2) {
                             if (exit$1 === 1) {
                               if (!static_row(row1$1)) {
                                 if (may_inst) {
-                                  var newrecord = row2$1.slice();
+                                  var newrecord = Caml_array.caml_array_dup(row2$1);
                                   var ext = newty2(100000000, /* Tvariant */Block.__(8, [(newrecord[/* row_fields */0] = r2$1, newrecord)]));
                                   moregen_occur(env$1, rm1[/* level */1], ext);
                                   link_type(rm1, ext);
@@ -34039,7 +34039,7 @@ function unalias(ty) {
       case 8 : 
           var row = row_repr_aux(/* [] */0, match[0]);
           var more = row[/* row_more */1];
-          var newrecord = row.slice();
+          var newrecord = Caml_array.caml_array_dup(row);
           return newty2(ty$1[/* level */1], /* Tvariant */Block.__(8, [(newrecord[/* row_more */1] = newty2(more[/* level */1], more[/* desc */0]), newrecord)]));
       case 0 : 
       case 9 : 
@@ -34215,7 +34215,7 @@ function normalize_type_rec(env, visited, ty) {
                           return param[1] !== /* Rabsent */0;
                         }))(fields));
             log_type(ty$1);
-            var newrecord = row.slice();
+            var newrecord = Caml_array.caml_array_dup(row);
             ty$1[/* desc */0] = /* Tvariant */Block.__(8, [(newrecord[/* row_fields */0] = fields$1, newrecord)]);
             break;
         default:
@@ -34340,7 +34340,7 @@ function nondep_type_rec(env, id, _ty) {
                       var match$4 = row$1[/* row_name */5];
                       if (match$4) {
                         if (isfree(id, match$4[0][0])) {
-                          var newrecord = row$1.slice();
+                          var newrecord = Caml_array.caml_array_dup(row$1);
                           tmp = /* Tvariant */Block.__(8, [(newrecord[/* row_name */5] = /* None */0, newrecord)]);
                         } else {
                           tmp = /* Tvariant */Block.__(8, [row$1]);
@@ -40320,7 +40320,7 @@ function tree_of_type_decl(id, decl) {
         switch (match$5.tag | 0) {
           case 0 : 
               if (Caml_obj.caml_equal(id, match$5[0])) {
-                var newrecord = row.slice();
+                var newrecord = Caml_array.caml_array_dup(row);
                 ty$1 = newty2(100000000, /* Tvariant */Block.__(8, [(newrecord[/* row_name */5] = /* None */0, newrecord)]));
               } else {
                 ty$1 = ty;
@@ -44005,12 +44005,12 @@ function strengthen_sig(env, sg, p) {
                       [/* Mnil */0]
                     ]))];
             if (decl[/* type_kind */2] === /* Type_abstract */0) {
-              var newrecord = decl.slice();
+              var newrecord = Caml_array.caml_array_dup(decl);
               newrecord[/* type_private */3] = /* Public */1;
               newrecord[/* type_manifest */4] = manif;
               newdecl = newrecord;
             } else {
-              var newrecord$1 = decl.slice();
+              var newrecord$1 = Caml_array.caml_array_dup(decl);
               newrecord$1[/* type_manifest */4] = manif;
               newdecl = newrecord$1;
             }
@@ -44262,7 +44262,7 @@ function enrich_typedecl(env, p, decl) {
       if (orig_decl[/* type_arity */1] !== decl[/* type_arity */1]) {
         return decl;
       } else {
-        var newrecord = decl.slice();
+        var newrecord = Caml_array.caml_array_dup(decl);
         newrecord[/* type_manifest */4] = /* Some */[newty2(100000000, /* Tconstr */Block.__(3, [
                   p,
                   decl[/* type_params */0],
@@ -45170,7 +45170,7 @@ function collect_arg_paths(mty) {
       return /* () */0;
     }
   };
-  var newrecord$3 = newrecord.slice();
+  var newrecord$3 = Caml_array.caml_array_dup(newrecord);
   newrecord$3[/* it_signature_item */1] = it_signature_item;
   newrecord$3[/* it_path */14] = it_path;
   Curry._2(newrecord$3[/* it_module_type */9], newrecord$3, mty);
@@ -47874,7 +47874,7 @@ function pretty_val(ppf, v) {
     var rem = match[1];
     var tmp = match[0][0];
     if (typeof tmp === "number") {
-      var newrecord = v.slice();
+      var newrecord = Caml_array.caml_array_dup(v);
       return Curry._2(Format.fprintf(ppf, /* Format */[
                       /* Formatting_gen */Block.__(18, [
                           /* Open_box */Block.__(1, [/* Format */[
@@ -47895,7 +47895,7 @@ function pretty_val(ppf, v) {
                       "@[(module %a)@]"
                     ]), pretty_val, (newrecord[/* pat_extra */2] = rem, newrecord));
     } else if (tmp.tag) {
-      var newrecord$1 = v.slice();
+      var newrecord$1 = Caml_array.caml_array_dup(v);
       return Curry._2(Format.fprintf(ppf, /* Format */[
                       /* Formatting_gen */Block.__(18, [
                           /* Open_box */Block.__(1, [/* Format */[
@@ -47916,7 +47916,7 @@ function pretty_val(ppf, v) {
                       "@[(# %a)@]"
                     ]), pretty_val, (newrecord$1[/* pat_extra */2] = rem, newrecord$1));
     } else {
-      var newrecord$2 = v.slice();
+      var newrecord$2 = Caml_array.caml_array_dup(v);
       return Curry._2(Format.fprintf(ppf, /* Format */[
                       /* Formatting_gen */Block.__(18, [
                           /* Open_box */Block.__(1, [/* Format */[
@@ -49719,7 +49719,7 @@ function complete_tags(nconsts, nconstrs, tags) {
 }
 
 function pat_of_constr(ex_pat, cstr) {
-  var newrecord = ex_pat.slice();
+  var newrecord = Caml_array.caml_array_dup(ex_pat);
   newrecord[/* pat_desc */0] = /* Tpat_construct */Block.__(4, [
       /* record */[
         /* txt : Lident */Block.__(0, ["?pat_of_constr?"]),
@@ -49736,7 +49736,7 @@ function pat_of_constrs(ex_pat, param) {
     var rem = param[1];
     var cstr = param[0];
     if (rem) {
-      var newrecord = ex_pat.slice();
+      var newrecord = Caml_array.caml_array_dup(ex_pat);
       newrecord[/* pat_desc */0] = /* Tpat_or */Block.__(8, [
           pat_of_constr(ex_pat, cstr),
           pat_of_constrs(ex_pat, rem),
@@ -50123,7 +50123,7 @@ function build_other(ext, env) {
                   exit = 1;
                   break;
               case 2 : 
-                  var newrecord = c.slice();
+                  var newrecord = Caml_array.caml_array_dup(c);
                   newrecord[/* cstr_name */0] = "*extension*";
                   return make_pat(/* Tpat_construct */Block.__(4, [
                                 match[0],
@@ -52353,7 +52353,7 @@ function check_deprecated(loc, attrs, s) {
               }), attrs);
 }
 
-var newrecord$3 = default_mapper.slice();
+var newrecord$3 = Caml_array.caml_array_dup(default_mapper);
 
 newrecord$3[/* attribute */0] = (function (_, a) {
     var exit = 0;
@@ -53279,13 +53279,13 @@ function transl_type(env, policy, styp) {
                   var $$static = static_row(row$1);
                   var row$2;
                   if ($$static) {
-                    var newrecord = row$1.slice();
+                    var newrecord = Caml_array.caml_array_dup(row$1);
                     newrecord[/* row_more */1] = newty2(current_level[0], /* Tnil */0);
                     row$2 = newrecord;
                   } else if (policy !== /* Univars */2) {
                     row$2 = row$1;
                   } else {
-                    var newrecord$1 = row$1.slice();
+                    var newrecord$1 = Caml_array.caml_array_dup(row$1);
                     newrecord$1[/* row_more */1] = new_pre_univar(/* None */0, /* () */0);
                     row$2 = newrecord$1;
                   }
@@ -53682,13 +53682,13 @@ function transl_type(env, policy, styp) {
           var $$static$1 = static_row(row$3);
           var row$4;
           if ($$static$1) {
-            var newrecord$2 = row$3.slice();
+            var newrecord$2 = Caml_array.caml_array_dup(row$3);
             newrecord$2[/* row_more */1] = newty2(current_level[0], /* Tnil */0);
             row$4 = newrecord$2;
           } else if (policy !== /* Univars */2) {
             row$4 = row$3;
           } else {
-            var newrecord$3 = row$3.slice();
+            var newrecord$3 = Caml_array.caml_array_dup(row$3);
             newrecord$3[/* row_more */1] = new_pre_univar(/* None */0, /* () */0);
             row$4 = newrecord$3;
           }
@@ -55622,7 +55622,7 @@ function build_as_type(env, _p) {
                     }), pl);
               var match$1 = instance_constructor(/* None */0, cstr);
               List.iter2((function (param) {
-                      var newrecord = param[0].slice();
+                      var newrecord = Caml_array.caml_array_dup(param[0]);
                       newrecord[/* pat_type */3] = param[1];
                       var partial_arg = newrecord;
                       return (function (param) {
@@ -55667,7 +55667,7 @@ function build_as_type(env, _p) {
               return function do_label(lbl) {
                 var match = instance_label(false, lbl);
                 var ty_arg = match[1];
-                var newrecord = p.slice();
+                var newrecord = Caml_array.caml_array_dup(p);
                 unify_pat(env, (newrecord[/* pat_type */3] = ty$1, newrecord), match[2]);
                 var refinable = false;
                 if (lbl[/* lbl_mut */3] === /* Immutable */0) {
@@ -55682,7 +55682,7 @@ function build_as_type(env, _p) {
                 }
                 if (refinable) {
                   var arg = List.assoc(lbl[/* lbl_pos */4], ppl);
-                  var newrecord$1 = arg.slice();
+                  var newrecord$1 = Caml_array.caml_array_dup(arg);
                   return unify_pat(env, (newrecord$1[/* pat_type */3] = build_as_type(env, arg), newrecord$1), ty_arg);
                 } else {
                   var match$2 = instance_label(false, lbl);
@@ -55711,7 +55711,7 @@ function build_as_type(env, _p) {
             } else {
               var ty1 = build_as_type(env, match[0]);
               var ty2 = build_as_type(env, p2);
-              var newrecord = p2.slice();
+              var newrecord = Caml_array.caml_array_dup(p2);
               unify_pat(env, (newrecord[/* pat_type */3] = ty2, newrecord), ty1);
               return ty1;
             }
@@ -55854,7 +55854,7 @@ function build_or_pat(env, loc, lid) {
     gloc_001,
     /* loc_ghost */true
   ];
-  var newrecord = row$1.slice();
+  var newrecord = Caml_array.caml_array_dup(row$1);
   var row$prime = [(newrecord[/* row_more */1] = newvar(/* None */0, /* () */0), newrecord)];
   var pats = List.map((function (param) {
           return /* record */[
@@ -55885,7 +55885,7 @@ function build_or_pat(env, loc, lid) {
                     /* pat_attributes : [] */0
                   ];
           }), pats[0], pats[1]);
-    var newrecord$1 = r.slice();
+    var newrecord$1 = Caml_array.caml_array_dup(r);
     return /* tuple */[
             path,
             rp((newrecord$1[/* pat_loc */1] = loc, newrecord$1)),
@@ -57143,7 +57143,7 @@ function type_pat(constrs, labels, no_existentials, mode, env, sp, expected_ty) 
           ];
           unify_pat_types(loc, env[0], newty2(current_level[0], /* Tvariant */Block.__(8, [row])), expected_ty);
           var arg = sarg$1 && arg_type && !arg_type[1] ? /* Some */[type_pat$1(/* None */0, /* None */0)(sarg$1[0], arg_type[0])] : /* None */0;
-          var newrecord = row.slice();
+          var newrecord = Caml_array.caml_array_dup(row);
           return rp(/* record */[
                       /* pat_desc : Tpat_variant */Block.__(5, [
                           l,
@@ -57443,7 +57443,7 @@ function type_pat(constrs, labels, no_existentials, mode, env, sp, expected_ty) 
           var match$15 = build_or_pat(env[0], loc, lid$1[/* txt */0]);
           var p$3 = match$15[1];
           unify_pat_types(loc, env[0], match$15[2], expected_ty);
-          var newrecord$1 = p$3.slice();
+          var newrecord$1 = Caml_array.caml_array_dup(p$3);
           newrecord$1[/* pat_extra */2] = /* :: */[
             /* tuple */[
               /* Tpat_type */Block.__(1, [
@@ -58513,7 +58513,7 @@ function check_absent_variant(env) {
                           /* row_fixed */false,
                           /* row_name : None */0
                         ];
-                        var newrecord = pat.slice();
+                        var newrecord = Caml_array.caml_array_dup(pat);
                         return unify_pat(env, (newrecord[/* pat_type */3] = newty2(current_level[0], /* Tvariant */Block.__(8, [row$prime])), newrecord), duplicate_type(pat[/* pat_type */3]));
                       }
                     }
@@ -59136,7 +59136,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
         if (separate) {
           end_def(/* () */0);
           generalize_structure$1(current_level[0], ty_res);
-          var newrecord = texp.slice();
+          var newrecord = Caml_array.caml_array_dup(texp);
           unify_exp(env$1, (newrecord[/* exp_type */3] = instance_def(ty_res), newrecord), instance(/* None */0, env$1, ty_expected$1));
           end_def(/* () */0);
           List.iter(generalize_structure$2, ty_args);
@@ -59163,7 +59163,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
               ];
         }
         var ty_res$1 = match$21[1];
-        var newrecord$1 = texp.slice();
+        var newrecord$1 = Caml_array.caml_array_dup(texp);
         newrecord$1[/* exp_type */3] = ty_res$1;
         if (!separate) {
           unify_exp(env$1, newrecord$1, instance(/* None */0, env$1, ty_expected$1));
@@ -59179,7 +59179,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
                 /* Private_type */Block.__(19, [ty_res$1])
               ];
         }
-        var newrecord$2 = newrecord$1.slice();
+        var newrecord$2 = Caml_array.caml_array_dup(newrecord$1);
         newrecord$2[/* exp_desc */0] = /* Texp_construct */Block.__(8, [
             lid$1,
             constr,
@@ -59411,7 +59411,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
               }
             };
             $$Array.iter(unify_kept, lbl_exp_list[0][1][/* lbl_all */5]);
-            var newrecord$3 = exp$1.slice();
+            var newrecord$3 = Caml_array.caml_array_dup(exp$1);
             opt_exp$1 = /* Some */[(newrecord$3[/* exp_type */3] = ty_exp$1, newrecord$3)];
           } else {
             throw [
@@ -60398,7 +60398,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
           switch (match$68.tag | 0) {
             case 0 : 
                 var exp$4 = type_exp(env, sbody$1);
-                var newrecord$4 = exp$4.slice();
+                var newrecord$4 = Caml_array.caml_array_dup(exp$4);
                 newrecord$4[/* exp_type */3] = newty2(current_level[0], /* Tpoly */Block.__(10, [
                         exp$4[/* exp_type */3],
                         /* [] */0
@@ -60423,12 +60423,12 @@ function type_expect_(in_function, env, sexp, ty_expected) {
                   var exp$5 = type_expect(/* None */0, env, sbody$1, ty$prime$prime);
                   end_def(/* () */0);
                   check_univars(env, false, "method", exp$5, ty_expected, match$69[0]);
-                  var newrecord$5 = exp$5.slice();
+                  var newrecord$5 = Caml_array.caml_array_dup(exp$5);
                   newrecord$5[/* exp_type */3] = instance(/* None */0, env, ty$9);
                   exp$3 = newrecord$5;
                 } else {
                   var exp$6 = type_expect(/* None */0, env, sbody$1, ty$prime$3);
-                  var newrecord$6 = exp$6.slice();
+                  var newrecord$6 = Caml_array.caml_array_dup(exp$6);
                   newrecord$6[/* exp_type */3] = instance(/* None */0, env, ty$9);
                   exp$3 = newrecord$6;
                 }
@@ -60444,7 +60444,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
                   ];
           }
         }
-        var newrecord$7 = exp$3.slice();
+        var newrecord$7 = Caml_array.caml_array_dup(exp$3);
         return re((newrecord$7[/* exp_extra */2] = /* :: */[
                       /* tuple */[
                         /* Texp_poly */Block.__(3, [match$67[1]]),
@@ -60595,7 +60595,7 @@ function type_expect_(in_function, env, sexp, ty_expected) {
         var match$76 = Curry._4(type_open[0], ovf, env, sexp[/* pexp_loc */1], lid$5);
         var newenv = match$76[1];
         var exp$7 = type_expect(/* None */0, newenv, match[2], ty_expected);
-        var newrecord$8 = exp$7.slice();
+        var newrecord$8 = Caml_array.caml_array_dup(exp$7);
         newrecord$8[/* exp_extra */2] = /* :: */[
           /* tuple */[
             /* Texp_open */Block.__(2, [
@@ -61659,7 +61659,7 @@ function type_label_exp(create, env, loc, ty_expected, param) {
       }
     }
   }
-  var newrecord = arg$1.slice();
+  var newrecord = Caml_array.caml_array_dup(arg$1);
   return /* tuple */[
           lid,
           label,
@@ -61786,11 +61786,11 @@ function type_argument(env, sarg, ty_expected$prime, ty_expected) {
       var ty_fun$prime = match$2[1];
       var args = match$2[0];
       var warn = principal[0] && (lv !== 100000000 || repr(ty_fun$prime)[/* level */1] !== 100000000);
-      var newrecord = texp.slice();
+      var newrecord = Caml_array.caml_array_dup(texp);
       newrecord[/* exp_type */3] = instance(/* None */0, env, texp[/* exp_type */3]);
       var ty_fun = instance(/* None */0, env, ty_fun$prime);
       if (match$2[2] || no_labels(ty_res)) {
-        var newrecord$1 = newrecord.slice();
+        var newrecord$1 = Caml_array.caml_array_dup(newrecord);
         unify_exp(env, (newrecord$1[/* exp_type */3] = ty_fun, newrecord$1), ty_expected);
         if (args === /* [] */0) {
           return newrecord;
@@ -62494,7 +62494,7 @@ function type_cases(in_function, env, ty_arg, ty_res, partial_flag, loc, caselis
             iter_pattern((function (param) {
                     return generalize_structure$1(current_level[0], param[/* pat_type */3]);
                   }), pat);
-            var newrecord = pat.slice();
+            var newrecord = Caml_array.caml_array_dup(pat);
             newrecord[/* pat_type */3] = instance(/* None */0, env$2, pat[/* pat_type */3]);
             pat$1 = newrecord;
           } else {
@@ -62556,7 +62556,7 @@ function type_cases(in_function, env, ty_arg, ty_res, partial_flag, loc, caselis
           }
           var guard = pc_guard ? /* Some */[type_expect(/* None */0, ext_env, wrap_unpacks(pc_guard[0], unpacks), type_bool)] : /* None */0;
           var exp = type_expect(in_function$1, ext_env, sexp, ty_res$prime);
-          var newrecord = exp.slice();
+          var newrecord = Caml_array.caml_array_dup(exp);
           return /* record */[
                   /* c_lhs */param[0],
                   /* c_guard */guard,
@@ -62750,7 +62750,7 @@ function type_let($staropt$star, $staropt$star$1, env, rec_flag, spat_sexp_list,
             if (typeof match === "number" || match.tag !== 10) {
               pat$1 = pat;
             } else {
-              var newrecord = pat.slice();
+              var newrecord = Caml_array.caml_array_dup(pat);
               newrecord[/* pat_type */3] = instance_poly(/* Some */[true], false, match[1], match[0])[1];
               pat$1 = newrecord;
             }
@@ -62772,7 +62772,7 @@ function type_let($staropt$star, $staropt$star$1, env, rec_flag, spat_sexp_list,
               iter_pattern((function (pat) {
                       return generalize_structure$1(current_level[0], pat[/* pat_type */3]);
                     }), pat);
-              var newrecord = pat.slice();
+              var newrecord = Caml_array.caml_array_dup(pat);
               newrecord[/* pat_type */3] = instance(/* None */0, env, pat[/* pat_type */3]);
               return newrecord;
             }), pat_list)) : pat_list;
@@ -62880,7 +62880,7 @@ function type_let($staropt$star, $staropt$star$1, env, rec_flag, spat_sexp_list,
             var exp = type_expect(/* None */0, exp_env, sexp$1, ty$prime);
             end_def(/* () */0);
             check_univars(env, true, "definition", exp, pat[/* pat_type */3], match$1[0]);
-            var newrecord = exp.slice();
+            var newrecord = Caml_array.caml_array_dup(exp);
             newrecord[/* exp_type */3] = instance(/* None */0, env, exp[/* exp_type */3]);
             return newrecord;
           }
@@ -62967,7 +62967,7 @@ function type_expression(env, sexp) {
     return exp;
   } else {
     var match$1 = lookup_value$1(match[0][/* txt */0], env);
-    var newrecord = exp.slice();
+    var newrecord = Caml_array.caml_array_dup(exp);
     newrecord[/* exp_type */3] = match$1[1][/* val_type */0];
     return newrecord;
   }
@@ -64580,7 +64580,7 @@ function set_fixed_row(env, loc, p, decl) {
           break;
       case 8 : 
           var row = row_repr_aux(/* [] */0, match$1[0]);
-          var newrecord = row.slice();
+          var newrecord = Caml_array.caml_array_dup(row);
           tm[/* desc */0] = /* Tvariant */Block.__(8, [(newrecord[/* row_fixed */4] = true, newrecord)]);
           rv = static_row(row) ? newty2(100000000, /* Tnil */0) : row[/* row_more */1];
           break;
@@ -65211,7 +65211,7 @@ function check_well_founded(env, loc, path, to_check, ty) {
 }
 
 function check_well_founded_decl(env, loc, path, decl, to_check) {
-  var newrecord$4 = newrecord.slice();
+  var newrecord$4 = Caml_array.caml_array_dup(newrecord);
   newrecord$4[/* it_type_expr */13] = (function () {
       return (function (param) {
           return check_well_founded(env, loc, path, to_check, param);
@@ -65725,7 +65725,7 @@ function compute_variance_gadt(env, check, rloc, decl, param) {
             /* [] */0,
             fvl
           ], tyl, rloc[0]);
-      var newrecord = decl.slice();
+      var newrecord = Caml_array.caml_array_dup(decl);
       return compute_variance_type(env, check, rloc, (newrecord[/* type_params */0] = tyl, newrecord[/* type_private */3] = /* Private */0, newrecord), add_false(tl));
     } else {
       throw [
@@ -65738,13 +65738,13 @@ function compute_variance_gadt(env, check, rloc, decl, param) {
           ];
     }
   } else {
-    var newrecord$1 = decl.slice();
+    var newrecord$1 = Caml_array.caml_array_dup(decl);
     return compute_variance_type(env, check, rloc, (newrecord$1[/* type_private */3] = /* Private */0, newrecord$1), add_false(tl));
   }
 }
 
 function compute_variance_extension(env, check, decl, ext, rloc) {
-  var newrecord = decl.slice();
+  var newrecord = Caml_array.caml_array_dup(decl);
   return compute_variance_gadt(env, check, rloc, (newrecord[/* type_params */0] = ext[/* ext_type_params */1], newrecord), /* tuple */[
               ext[/* ext_args */2],
               ext[/* ext_ret_type */3]
@@ -65842,7 +65842,7 @@ function compute_variance_fixpoint(env, decls, required, _variances) {
   while(true) {
     var variances = _variances;
     var new_decls = List.map2((function (param, variance) {
-            var newrecord = param[1].slice();
+            var newrecord = Caml_array.caml_array_dup(param[1]);
             return /* tuple */[
                     param[0],
                     (newrecord[/* type_variance */5] = variance, newrecord)
@@ -65951,9 +65951,9 @@ function compute_variance_decls(env, cldecls) {
   return List.map2((function (param, param$1) {
                 var decl = param[1];
                 var variance = decl[/* type_variance */5];
-                var newrecord = param$1[2].slice();
-                var newrecord$1 = param$1[3].slice();
-                var newrecord$2 = param$1[4].slice();
+                var newrecord = Caml_array.caml_array_dup(param$1[2]);
+                var newrecord$1 = Caml_array.caml_array_dup(param$1[3]);
+                var newrecord$2 = Caml_array.caml_array_dup(param$1[4]);
                 return /* tuple */[
                         decl,
                         (newrecord[/* type_variance */5] = variance, newrecord),
@@ -66030,7 +66030,7 @@ function name_recursion(sdecl, id, decl) {
             td_002
           ]);
         link_type(ty, newty2(ty[/* level */1], td));
-        var newrecord = decl.slice();
+        var newrecord = Caml_array.caml_array_dup(decl);
         newrecord[/* type_manifest */4] = /* Some */[ty$prime];
         return newrecord;
       } else {
@@ -66651,7 +66651,7 @@ function transl_type_decl(env, rec_flag, sdecl_list) {
           return check_coherence(env, sdecl[/* ptype_loc */7], param$2[0], param$2[1]);
         }), sdecl_list$1, final_decls);
   var final_decls$1 = List.map2((function (tdecl, param) {
-          var newrecord = tdecl.slice();
+          var newrecord = Caml_array.caml_array_dup(tdecl);
           newrecord[/* typ_type */3] = param[1];
           return newrecord;
         }), tdecls, final_decls);
@@ -67181,7 +67181,7 @@ function transl_with_constraint(env, id, row_path, orig_decl, sdecl) {
         ];
   }
   var decl$1 = name_recursion(sdecl, id, decl);
-  var newrecord = decl$1.slice();
+  var newrecord = Caml_array.caml_array_dup(decl$1);
   newrecord[/* type_variance */5] = compute_variance_decl(env, false, decl$1, /* tuple */[
         add_injectivity(List.map((function (prim) {
                     return prim[1];
@@ -71517,7 +71517,7 @@ function approx_class(sdecl) {
         /* pcsig_self */self$prime,
         /* pcsig_fields : [] */0
       ]);
-  var newrecord = sdecl.slice();
+  var newrecord = Caml_array.caml_array_dup(sdecl);
   newrecord[/* pci_expr */3] = clty$prime;
   return newrecord;
 }
@@ -72872,7 +72872,7 @@ function merge_constraint(initial_env, loc, sg, constr) {
                         var tdecl = transl_with_constraint(initial_env$1, id, /* Some */[/* Pident */Block.__(0, [id_row])], decl, sdecl);
                         var newdecl = tdecl[/* typ_type */3];
                         check_type_decl(env, sdecl[/* ptype_loc */7], id, row_id, newdecl, decl, rs, rem);
-                        var newrecord = decl_row.slice();
+                        var newrecord = Caml_array.caml_array_dup(decl_row);
                         newrecord[/* type_params */0] = newdecl[/* type_params */0];
                         var rs$prime = rs === /* Trec_first */1 ? /* Trec_not */0 : rs;
                         return /* tuple */[
@@ -74647,7 +74647,7 @@ function package_constraints(env, loc, mty, constrs) {
                             id[/* name */1],
                             /* [] */0
                           ], constrs);
-                      var newrecord = td.slice();
+                      var newrecord = Caml_array.caml_array_dup(td);
                       return /* Sig_type */Block.__(1, [
                                 id,
                                 (newrecord[/* type_manifest */4] = /* Some */[ty], newrecord),

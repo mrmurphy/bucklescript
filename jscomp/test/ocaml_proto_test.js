@@ -14,6 +14,7 @@ var Parsing = require("../../lib/js/parsing.js");
 var Caml_obj = require("../../lib/js/caml_obj.js");
 var Filename = require("../../lib/js/filename.js");
 var Printexc = require("../../lib/js/printexc.js");
+var Caml_array = require("../../lib/js/caml_array.js");
 var Pervasives = require("../../lib/js/pervasives.js");
 var Caml_format = require("../../lib/js/caml_format.js");
 var Caml_string = require("../../lib/js/caml_string.js");
@@ -100,7 +101,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
     ];
   var proto$3;
   if (syntax) {
-    var newrecord = proto$2.slice();
+    var newrecord = Caml_array.caml_array_dup(proto$2);
     newrecord[/* syntax */0] = syntax;
     proto$3 = newrecord;
   } else {
@@ -108,7 +109,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
   }
   var proto$4;
   if ($$package) {
-    var newrecord$1 = proto$3.slice();
+    var newrecord$1 = Caml_array.caml_array_dup(proto$3);
     newrecord$1[/* package */3] = $$package;
     proto$4 = newrecord$1;
   } else {
@@ -116,7 +117,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
   }
   var proto$5;
   if (message) {
-    var newrecord$2 = proto$4.slice();
+    var newrecord$2 = Caml_array.caml_array_dup(proto$4);
     newrecord$2[/* messages */4] = /* :: */[
       message[0],
       proto$2[/* messages */4]
@@ -127,7 +128,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
   }
   var proto$6;
   if ($$enum) {
-    var newrecord$3 = proto$5.slice();
+    var newrecord$3 = Caml_array.caml_array_dup(proto$5);
     newrecord$3[/* enums */5] = /* :: */[
       $$enum[0],
       proto$2[/* enums */5]
@@ -138,7 +139,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
   }
   var proto$7;
   if ($$import) {
-    var newrecord$4 = proto$6.slice();
+    var newrecord$4 = Caml_array.caml_array_dup(proto$6);
     newrecord$4[/* imports */1] = /* :: */[
       $$import[0],
       proto$2[/* imports */1]
@@ -149,7 +150,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
   }
   var proto$8;
   if (file_option) {
-    var newrecord$5 = proto$7.slice();
+    var newrecord$5 = Caml_array.caml_array_dup(proto$7);
     newrecord$5[/* file_options */2] = /* :: */[
       file_option[0],
       proto$2[/* file_options */2]
@@ -159,7 +160,7 @@ function proto(syntax, file_option, $$package, $$import, message, $$enum, proto$
     proto$8 = proto$7;
   }
   if (extend) {
-    var newrecord$6 = proto$8.slice();
+    var newrecord$6 = Caml_array.caml_array_dup(proto$8);
     newrecord$6[/* extends */6] = /* :: */[
       extend[0],
       proto$2[/* extends */6]
